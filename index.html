@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, shrink-to-fit=no">
-<title>Mohammad Mazbah Uddin – ©2021-2024</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mohammad Mazbah Uddin</title>
 <meta name= "Description" content="I’m Mohammad Mazbah Uddin. (±18) A self-employed from Bangladesh. Basically I’m a Graphics Designer, WordPress Web Designer, Video Editor, Content Creator and more..."/>
 <meta name= "Keyword" content="mohammad mazbah uddin,
 mazbah229, mazbah.229, mazbah 229, @mazbah229, Mazbah, mazhab ki, mazhab ki o keno pdf, Video Editor, video editor online, video editor app,
@@ -40,108 +40,103 @@ graphic designer freelancer profile,"/>
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Mohammad Mazbah Uddin">
    
-    <meta http-equiv="refresh" content="0; URL=http://dev-mabah-practice.pantheonsite.io/" /> 
+    <meta http-equiv="refresh" content="1; URL=http://dev-mabah-practice.pantheonsite.io/" /> 
    
-    <title>Redirecting...</title>
-    <link rel="shortcut icon" href="favicon.png">
     <style>
-        /* Basic reset */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        /* Fullscreen container */
-        body, html {
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            background-color: #121212;
+        body {
             font-family: Arial, sans-serif;
-            color: #ffffff;
-        }
-
-        /* Loader container */
-        .loader-container {
-            text-align: center;
-            flex-grow: 1;
+            background-color: #001b78;
+            color: #fff;
             display: flex;
-            flex-direction: column;
-            justify-content: center;
             align-items: center;
+            justify-content: center;
+            height: 100vh;
+            overflow: hidden;
         }
 
-        /* Loading text */
-        .loader-text {
-            font-size: 18px;
-            color: #bbbbbb;
-            margin-top: 15px;
-        }
-        .button-10 {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 6px 14px;
-  font-family: -apple-system, BlinkMacSystemFont, 'Roboto', sans-serif;
-  border-radius: 6px;
-  border: none;
-
-  color: #fff;
-  background: linear-gradient(180deg, #4B91F7 0%, #367AF6 100%);
-   background-origin: border-box;
-  box-shadow: 0px 0.5px 1.5px rgba(54, 122, 246, 0.25), inset 0px 0.8px 0px -0.25px rgba(255, 255, 255, 0.2);
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-}
-
-.button-10:focus {
-  box-shadow: inset 0px 0.8px 0px -0.25px rgba(255, 255, 255, 0.2), 0px 0.5px 1.5px rgba(54, 122, 246, 0.25), 0px 0px 0px 3.5px rgba(58, 108, 217, 0.5);
-  outline: 0;
-}
-        /* Spinner */
-        .spinner {
-            width: 60px;
-            height: 60px;
-            border: 6px solid #333;
-            border-top: 6px solid #3498db;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-
-        /* Footer */
-        .footer {
-            font-size: 14px;
-            color: #888888;
-            padding: 20px 0;
+        .container {
             text-align: center;
-            width: 100%;
         }
 
-        /* Spinner animation */
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 5px solid #fff;
+            margin-bottom: 20px;
         }
-        a {color: #888888;}
+
+        h1 {
+            font-size: 2rem;
+            color: #f6ff00;
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            font-size: 1rem;
+            font-weight: 300;
+            margin-bottom: 30px;
+        }
+.loading span {
+            animation: blink 1.5s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.3;
+            }
+        }
+        .loader {
+            border: 5px solid rgba(255, 255, 255, 0.2);
+            border-top: 5px solid #f6ff00;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto 0;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            h2 {
+                font-size: 0.875rem;
+            }
+
+            .profile-img {
+                width: 120px;
+                height: 120px;
+            }
+        }
     </style>
 </head>
 <body>
-
-    <div class="loader-container">
-        <div class="spinner"></div>
-        <div class="loader-text">Website is under development, Redirecting you to alternative website....</div>
-        <br> <br>
-       
+    <div class="container">
+        <img src="profile.jpg" alt="Mohammad Mazbah Uddin" class="profile-img">
+        <h1>Mohammad Mazbah Uddin</h1>
+        <h2>WordPress Web Designer | Landing Page Designer | GFX Designer</h2>
+        <div class="loader"></div><br>
+      <div class="loading">  <span><i>Loading, Please Wait...</i></span></div>
     </div>
-
-    <div class="footer">
-        © 2021-<span id="year"></span><b> <a href="https://mazbah229.github.io/" target="_blank" class="">MOHAMMAD MAZBAH UDDIN</a></b>. All Rights Reserved.
-    </div>
-
 </body>
-<script>document.getElementById("year").innerHTML = new Date().getFullYear();</script>
 </html>
