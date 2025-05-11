@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="bn">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Licence Error</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+        font-family: "Hind Siliguri", sans-serif;
+      background: linear-gradient(135deg, #002366, #0044cc);
+      color: white;
+      text-align: center;
+      padding: 30px 20px;
+      margin: 0;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: auto;
+    }
+
+    .icon {
+      font-size: 60px;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      font-size: 36px;
+      margin-bottom: 20px;
+      font-weight: bold;
+    }
+
+    p {
+      font-size: 18px;
+      margin-bottom: 30px;
+      line-height: 1.6;
+    }
+
+    .buttons a {
+      display: inline-block;
+      margin: 10px;
+      padding: 15px 25px;
+      text-decoration: none;
+      font-size: 18px;
+      border-radius: 8px;
+      transition: background 0.3s ease;
+    }
+
+    .call-button {
+      background-color: #00b33c;
+      color: white;
+    }
+
+    .payment-button {
+      background-color: yellow;
+      color: black;
+    }
+
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 28px;
+      }
+      p {
+        font-size: 16px;
+      }
+      .buttons a {
+        padding: 12px 20px;
+        font-size: 16px;
+      }
+    }
+    a {
+        text-decoration: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="icon">⚠️</div>
+    <h1>লাইসেন্স ইরর!</h1>
+    <p>
+      আপনি সম্ভবত ডেভেলপারকে সম্পূর্ণ পারিশ্রমিক দেননি অথবা<br>
+      আপনার ডোমেইন কিংবা হোস্টিং এর মেয়াদ শেষ হয়ে গেছে।<br>
+      লাইসেন্স এক্টিভ করতে যোগাযোগ করুন অথবা পেমেন্ট করে সরাসরি যোগাযোগ করুন।
+    </p>
+    <div class="buttons">
+        <a class="call-button" href="https://wa.me/8801613321875" target="_blank">🎧 WhatsApp</a>
+      <a class="payment-button" href="payment.html">পেমেন্ট করুন</a>
+    </div>
+    <p>
+        Copyright © 2021-<span id="year"></span> | <b><a href="https://mazbah229.github.io/" style="color: yellow;">Mazbah's Work</a></b>
+      </p>
+  </div>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+
+</html>
