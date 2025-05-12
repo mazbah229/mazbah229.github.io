@@ -4,8 +4,8 @@
       "status": "active",
       "domain": "clientdomain.com"
     },
-     "QWERTYUIO": {
-      "status": "active",
+    "QWERTYUIO": {
+      "status": "inactive",
       "domain": "mazbah229.my.id"
     }
   }
