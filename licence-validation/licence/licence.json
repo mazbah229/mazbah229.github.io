@@ -9,6 +9,11 @@
       "domain": "hibamart.com.bd",
       "status": "active",
       "expiry": "Unlimited"
+    },
+    "QGKIAWRPV3": {
+      "domain": "0",
+      "status": "active",
+      "expiry": "2026-05-12"
     }
   }
 }
