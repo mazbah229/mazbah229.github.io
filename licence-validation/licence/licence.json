@@ -1,13 +1,8 @@
 {
-    "licenses": {
-      "ABC123XYZ": {
-        "status": "active",
-        "domain": "clientdomain.com"
-      },
-      "QWERTYUIO": {
-        "status": "inactive",
-        "domain": "xyz.my.id"
-      }
+  "licenses": {
+    "ABC123XYZ": {
+      "status": "active",
+      "domain": "clientdomain.com"
     }
   }
-  
+}
