@@ -186,7 +186,539 @@
     }
 
     async function saveToGitHub() {
-      const token = 'YOUR_PERSONAL_ACCESS_TOKEN'; // ⚠️ Replace with your real token (for test only)
+      const token = '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'; // ⚠️ Replace with your real token (for test only)
+      const repoOwner = 'mazbah229';
+      const repoName = 'mazbah229.github.io';
+      const filePath = 'licence-validation/licence/licence.json';
+      const apiUrl = `https://api.github.com/repos/${repoOwner}/${repoName}/contents/${filePath}`;
+
+      if (!token) return;
+
+      const content = {
+        licenses
+      };
+      const fileContent = btoa(unescape(encodeURIComponent(JSON.stringify(content, null, 2))));
+
+      try {
+        const getRes = await fetch(apiUrl, {
+          headers: {
+            'Authorization': `token ${token}`,
+            'Accept': 'application/vnd.github.v3+json'
+          }
+        });
+
+        const getData = await getRes.json();
+        const sha = getData.sha;
+
+        const putRes = await fetch(apiUrl, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `token ${token}`
+          },
+          body: JSON.stringify({
+            message: 'Update license list',
+            content: fileContent,
+            sha: sha
+          })
+        });
+
+        if (!putRes.ok) {
+          alert('Failed to update GitHub');
+        } else {
+          alert('GitHub license file updated!');
+        }
+      } catch (err) {
+        console.error(err);
+        alert('Error accessing GitHub API');
+      }
+    }
+
+    function generateLicense() {
+      const domain = document.getElementById('domain').value.trim();
+      const months = parseInt(document.getElementById('validity').value);
+      if (!domain) return alert('Domain is required');
+
+      const key = generateLicenseKey();
+      licenses[key] = {
+        status: 'active',
+        domain,
+        expiry: calculateExpiry(months)
+      };
+      alert('License created: ' + key);
+      renderTable();
+      saveToGitHub();
+    }
+
+    function toggleStatus(key) {
+      licenses[key].status = licenses[key].status === 'active' ? 'inactive' : 'active';
+      renderTable();
+      saveToGitHub();
+    }
+
+    function removeLicense(key) {
+      delete licenses[key];
+      renderTable();
+      saveToGitHub();
+    }
+  </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>License Dashboard - Mazbah</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+    body {
+      background-color: #f5f5f5;
+      color: #333;
+      padding: 20px;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .form-group {
+      margin-bottom: 15px;
+    }
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+    input, select {
+      width: 100%;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    button {
+      background-color: #007bff;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    table {
+      width: 100%;
+      margin-top: 20px;
+      border-collapse: collapse;
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 10px;
+      text-align: center;
+    }
+    th {
+      background-color: #f0f0f0;
+    }
+    .login-form {
+      max-width: 400px;
+      margin: 100px auto;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .hidden {
+      display: none;
+    }
+    @media (max-width: 600px) {
+      .container, .login-form {
+        padding: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="login-form" id="loginForm">
+    <h2>Admin Login</h2>
+    <div class="form-group">
+      <label for="username">Username</label>
+      <input type="text" id="username" />
+    </div>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" id="password" />
+    </div>
+    <button onclick="validateLogin()">Login</button>
+  </div>
+
+  <div class="container hidden" id="dashboard">
+    <h2>License Dashboard</h2>
+    <div class="form-group">
+      <label for="domain">Domain</label>
+      <input type="text" id="domain" placeholder="example.com" />
+    </div>
+    <div class="form-group">
+      <label for="validity">Validity (Months, leave 0 for unlimited)</label>
+      <input type="number" id="validity" value="0" />
+    </div>
+    <button onclick="generateLicense()">Generate License</button>
+
+    <h3>License List</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>License Key</th>
+          <th>Domain</th>
+          <th>Status</th>
+          <th>Expiry</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="licenseTable"></tbody>
+    </table>
+  </div>
+
+  <script>
+    const USERNAME = 'mazbah229';
+    const PASSWORD = 'mazbahsecure2025';
+
+    function validateLogin() {
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+
+      if (username === USERNAME && password === PASSWORD) {
+        document.getElementById('loginForm').classList.add('hidden');
+        document.getElementById('dashboard').classList.remove('hidden');
+        loadLicenses();
+      } else {
+        alert('Invalid credentials');
+      }
+    }
+
+    function generateLicenseKey() {
+      return Math.random().toString(36).substring(2, 10).toUpperCase();
+    }
+
+    function calculateExpiry(months) {
+      if (months === 0) return 'Unlimited';
+      const date = new Date();
+      date.setMonth(date.getMonth() + months);
+      return date.toISOString().split('T')[0];
+    }
+
+    let licenses = {};
+
+    async function loadLicenses() {
+      try {
+        const res = await fetch('https://mazbah229.github.io/licence-validation/licence/licence.json');
+        const data = await res.json();
+        licenses = data.licenses || {};
+        renderTable();
+      } catch (err) {
+        alert('Error loading license file');
+      }
+    }
+
+    function renderTable() {
+      const tbody = document.getElementById('licenseTable');
+      tbody.innerHTML = '';
+      Object.entries(licenses).forEach(([key, info]) => {
+        const row = `<tr>
+          <td>${key}</td>
+          <td>${info.domain}</td>
+          <td>${info.status}</td>
+          <td>${info.expiry || 'Unlimited'}</td>
+          <td>
+            <button onclick="toggleStatus('${key}')">${info.status === 'active' ? 'Deactivate' : 'Activate'}</button>
+            <button onclick="removeLicense('${key}')">Remove</button>
+          </td>
+        </tr>`;
+        tbody.innerHTML += row;
+      });
+    }
+
+    async function saveToGitHub() {
+      const token = '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'; // ⚠️ Replace with your real token (for test only)
+      const repoOwner = 'mazbah229';
+      const repoName = 'mazbah229.github.io';
+      const filePath = 'licence-validation/licence/licence.json';
+      const apiUrl = `https://api.github.com/repos/${repoOwner}/${repoName}/contents/${filePath}`;
+
+      if (!token) return;
+
+      const content = {
+        licenses
+      };
+      const fileContent = btoa(unescape(encodeURIComponent(JSON.stringify(content, null, 2))));
+
+      try {
+        const getRes = await fetch(apiUrl, {
+          headers: {
+            'Authorization': `token ${token}`,
+            'Accept': 'application/vnd.github.v3+json'
+          }
+        });
+
+        const getData = await getRes.json();
+        const sha = getData.sha;
+
+        const putRes = await fetch(apiUrl, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `token ${token}`
+          },
+          body: JSON.stringify({
+            message: 'Update license list',
+            content: fileContent,
+            sha: sha
+          })
+        });
+
+        if (!putRes.ok) {
+          alert('Failed to update GitHub');
+        } else {
+          alert('GitHub license file updated!');
+        }
+      } catch (err) {
+        console.error(err);
+        alert('Error accessing GitHub API');
+      }
+    }
+
+    function generateLicense() {
+      const domain = document.getElementById('domain').value.trim();
+      const months = parseInt(document.getElementById('validity').value);
+      if (!domain) return alert('Domain is required');
+
+      const key = generateLicenseKey();
+      licenses[key] = {
+        status: 'active',
+        domain,
+        expiry: calculateExpiry(months)
+      };
+      alert('License created: ' + key);
+      renderTable();
+      saveToGitHub();
+    }
+
+    function toggleStatus(key) {
+      licenses[key].status = licenses[key].status === 'active' ? 'inactive' : 'active';
+      renderTable();
+      saveToGitHub();
+    }
+
+    function removeLicense(key) {
+      delete licenses[key];
+      renderTable();
+      saveToGitHub();
+    }
+  </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>License Dashboard - Mazbah</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+    body {
+      background-color: #f5f5f5;
+      color: #333;
+      padding: 20px;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .form-group {
+      margin-bottom: 15px;
+    }
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+    input, select {
+      width: 100%;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    button {
+      background-color: #007bff;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    table {
+      width: 100%;
+      margin-top: 20px;
+      border-collapse: collapse;
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 10px;
+      text-align: center;
+    }
+    th {
+      background-color: #f0f0f0;
+    }
+    .login-form {
+      max-width: 400px;
+      margin: 100px auto;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .hidden {
+      display: none;
+    }
+    @media (max-width: 600px) {
+      .container, .login-form {
+        padding: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="login-form" id="loginForm">
+    <h2>Admin Login</h2>
+    <div class="form-group">
+      <label for="username">Username</label>
+      <input type="text" id="username" />
+    </div>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" id="password" />
+    </div>
+    <button onclick="validateLogin()">Login</button>
+  </div>
+
+  <div class="container hidden" id="dashboard">
+    <h2>License Dashboard</h2>
+    <div class="form-group">
+      <label for="domain">Domain</label>
+      <input type="text" id="domain" placeholder="example.com" />
+    </div>
+    <div class="form-group">
+      <label for="validity">Validity (Months, leave 0 for unlimited)</label>
+      <input type="number" id="validity" value="0" />
+    </div>
+    <button onclick="generateLicense()">Generate License</button>
+
+    <h3>License List</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>License Key</th>
+          <th>Domain</th>
+          <th>Status</th>
+          <th>Expiry</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="licenseTable"></tbody>
+    </table>
+  </div>
+
+  <script>
+    const USERNAME = 'mazbah229';
+    const PASSWORD = 'mazbahsecure2025';
+
+    function validateLogin() {
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+
+      if (username === USERNAME && password === PASSWORD) {
+        document.getElementById('loginForm').classList.add('hidden');
+        document.getElementById('dashboard').classList.remove('hidden');
+        loadLicenses();
+      } else {
+        alert('Invalid credentials');
+      }
+    }
+
+    function generateLicenseKey() {
+      return Math.random().toString(36).substring(2, 10).toUpperCase();
+    }
+
+    function calculateExpiry(months) {
+      if (months === 0) return 'Unlimited';
+      const date = new Date();
+      date.setMonth(date.getMonth() + months);
+      return date.toISOString().split('T')[0];
+    }
+
+    let licenses = {};
+
+    async function loadLicenses() {
+      try {
+        const res = await fetch('https://mazbah229.github.io/licence-validation/licence/licence.json');
+        const data = await res.json();
+        licenses = data.licenses || {};
+        renderTable();
+      } catch (err) {
+        alert('Error loading license file');
+      }
+    }
+
+    function renderTable() {
+      const tbody = document.getElementById('licenseTable');
+      tbody.innerHTML = '';
+      Object.entries(licenses).forEach(([key, info]) => {
+        const row = `<tr>
+          <td>${key}</td>
+          <td>${info.domain}</td>
+          <td>${info.status}</td>
+          <td>${info.expiry || 'Unlimited'}</td>
+          <td>
+            <button onclick="toggleStatus('${key}')">${info.status === 'active' ? 'Deactivate' : 'Activate'}</button>
+            <button onclick="removeLicense('${key}')">Remove</button>
+          </td>
+        </tr>`;
+        tbody.innerHTML += row;
+      });
+    }
+
+    async function saveToGitHub() {
+      const token = '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'; // ⚠️ Replace with your real token (for test only)
       const repoOwner = 'mazbah229';
       const repoName = 'mazbah229.github.io';
       const filePath = 'licence-validation/licence/licence.json';
