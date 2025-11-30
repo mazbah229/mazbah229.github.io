@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Auto Redirect -->
+<meta http-equiv="refresh" content="1; URL=https://mazbah229.github.io/cv/%5BCV%5D%20Mohammad%20Mazbah%20Uddin.pdf">
+
+<title>Downloading CV...</title>
+<link rel="shortcut icon" href="assets/img/favicon.png">
+
+<style>
+    /* RESET */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Inter", sans-serif;
+    }
+
+    /* PAGE */
+    body {
+        height: 100vh;
+        width: 100%;
+        background: radial-gradient(circle at top, #202040, #0d0d16);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        color: #fff;
+    }
+
+    /* GLASS CARD */
+    .glass-box {
+        width: 350px;
+        padding: 40px 30px;
+        border-radius: 18px;
+        backdrop-filter: blur(14px);
+        background: rgba(255,255,255,0.06);
+        border: 1px solid rgba(255,255,255,0.1);
+        text-align: center;
+        box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+        animation: fadeIn .7s ease-out;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Loader Spinner */
+    .spinner {
+        width: 65px;
+        height: 65px;
+        border: 6px solid rgba(255,255,255,0.15);
+        border-top: 6px solid #4a8bff;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        margin: 0 auto 20px auto;
+    }
+
+    @keyframes spin {
+        to { transform: rotate(360deg); }
+    }
+
+    /* Text */
+    .loading-text {
+        font-size: 17px;
+        margin-bottom: 25px;
+        color: #D6D6D6;
+    }
+    .loading-text b { color: #fff; }
+
+    /* Button */
+    .back-btn {
+        display: inline-block;
+        padding: 10px 18px;
+        background: linear-gradient(135deg, #4B91F7, #367AF6);
+        border-radius: 8px;
+        color: #fff;
+        font-size: 15px;
+        font-weight: 600;
+        border: none;
+        cursor: pointer;
+        box-shadow: 0 4px 15px rgba(54, 122, 246, 0.35);
+        transition: .2s;
+    }
+
+    .back-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(54, 122, 246, 0.45);
+    }
+
+    /* Footer */
+    .footer {
+        margin-top: 35px;
+        font-size: 14px;
+        color: #aaa;
+        text-align: center;
+    }
+
+    .footer a {
+        color: #d5d5ff;
+        font-weight: 600;
+        text-decoration: none;
+    }
+
+    .footer a:hover {
+        text-decoration: underline;
+    }
+</style>
+</head>
+
+<body>
+
+    <div class="glass-box">
+        <div class="spinner"></div>
+
+        <p class="loading-text">
+            Please wait… <br> Downloading the <b>CV</b>.
+        </p>
+
+        <a href="https://mazbah229.github.io/">
+            <button class="back-btn">⬅ Back</button>
+        </a>
+    </div>
+
+    <div class="footer">
+        © 2021-<span id="year"></span> 
+        <a href="/" target="_blank">MOHAMMAD MAZBAH UDDIN</a>. 
+        All Rights Reserved.
+    </div>
+
+<script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
