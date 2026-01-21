@@ -91,6 +91,19 @@ img.emoji {
   line-height: 1;
 }
 
+	.bmc-official-float {
+  opacity: 1;
+  pointer-events: auto;
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.bmc-official-float.bmc-hide {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(10px);
+}
+
+
 .bmc-text {
   white-space: nowrap;
 }
@@ -1159,6 +1172,35 @@ document.addEventListener("DOMContentLoaded", () => {
 </a>
 
 
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const bmcBtn = document.querySelector(".bmc-official-float");
+    const copyrightSection = document.querySelector(".cs_copyright");
+
+    if (!bmcBtn || !copyrightSection) {
+      console.warn("BMC button or .cs_copyright not found");
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            bmcBtn.classList.add("bmc-hide");
+          } else {
+            bmcBtn.classList.remove("bmc-hide");
+          }
+        });
+      },
+      {
+        root: null,
+        threshold: 0.1
+      }
+    );
+
+    observer.observe(copyrightSection);
+  });
+</script>
 
 </body>
 </html>
