@@ -54,13 +54,30 @@ img.emoji {
 
 	
   /* Buy Me a Coffee button fixed bottom-right */
-  #bmc-wbtn {
-    position: fixed !important;
-    bottom: 20px !important;
-    right: 20px !important;
-    left: auto !important;
-    z-index: 9999 !important;
-  }
+ .bmc-float {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  width: 60px;
+  height: 60px;
+  background: #ffdd00;
+  color: #000;
+  font-size: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+  z-index: 9999;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.bmc-float:hover {
+  transform: scale(1.1);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
+}
+
 
 
 </style>
@@ -1115,8 +1132,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
 <!--Contact End-->
 
+<a
+  href="https://www.buymeacoffee.com/mazbah229"
+  target="_blank"
+  class="bmc-float"
+  aria-label="Buy me a coffee">
+  ☕
+</a>
 
-<script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="mazbah229" data-color="#5F7FFF" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#ffffff" data-coffee-color="#FFDD00" ></script>
 
 </body>
 </html>
