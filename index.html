@@ -130,9 +130,29 @@ img.emoji {
 
 .support-options {
   display: flex;
-  gap: 12px;
+  gap: 14px;
   justify-content: center;
   align-items: center;
+}
+
+.support-options a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.support-options img {
+  height: 36px;        /* 👈 magic line */
+  width: auto;
+  max-width: 120px;
+  border-radius: 10px;
+  object-fit: contain;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.support-options img:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
 }
 
 /* each support button */
@@ -148,14 +168,7 @@ img.emoji {
   text-decoration: none;
 }
 
-/* logo image */
-.support-btn img {
-  height: 32px;          /* 👈 small & clean */
-  width: auto;
-  max-width: 120px;
-  object-fit: contain;
-  display: block;
-}
+
 
 
 </style>
