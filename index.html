@@ -54,6 +54,17 @@ img.emoji {
     width: 1.2em;
     vertical-align: -0.15em;
 }
+.bmc-official-float {
+  opacity: 1;
+  pointer-events: auto;
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.bmc-official-float.bmc-hide {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(10px);
+}
 
 	
   /* Popup overlay */
@@ -1282,21 +1293,20 @@ document.addEventListener("DOMContentLoaded", function () {
   const btn = document.getElementById("supportBtn");
   const popup = document.getElementById("supportPopup");
   const close = document.getElementById("popupClose");
-  const copyrightSection = document.querySelector(".cs_copyright");
+  const footer = document.querySelector(".cs_copyright");
 
-  /* safety check */
-  if (!btn) {
-    console.warn("supportBtn not found");
+  if (!btn || !footer) {
+    console.warn("supportBtn or .cs_copyright not found");
     return;
   }
 
-  /* always keep button & popup in body (footer conflict fix) */
+  /* ensure floating button is NOT inside footer */
   document.body.appendChild(btn);
   if (popup) document.body.appendChild(popup);
 
-  /* ----------------------------
-     Popup open / close logic
-  ----------------------------- */
+  /* ===============================
+     Popup open / close
+  ================================ */
   btn.addEventListener("click", () => {
     if (popup) {
       popup.classList.add("active");
@@ -1318,46 +1328,28 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && popup?.classList.contains("active")) {
-      popup.classList.remove("active");
-      btn.classList.remove("bmc-hide");
-    }
-  });
-
-  /* ----------------------------
-     Footer hide logic (IntersectionObserver)
-  ----------------------------- */
-  if (!copyrightSection) {
-    console.warn(".cs_copyright not found");
-    return;
-  }
-
+  /* ===============================
+     Footer hide (IntersectionObserver)
+  ================================ */
   const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           btn.classList.add("bmc-hide");
         } else {
-          // popup বন্ধ থাকলে তবেই show
           if (!popup || !popup.classList.contains("active")) {
             btn.classList.remove("bmc-hide");
           }
         }
       });
     },
-    {
-      root: null,
-      threshold: 0.1
-    }
+    { threshold: 0.1 }
   );
 
-  observer.observe(copyrightSection);
+  observer.observe(footer);
 
 });
 </script>
-
-
 
 </body>
 </html>
