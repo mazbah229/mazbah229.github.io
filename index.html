@@ -134,11 +134,35 @@ img.emoji {
   justify-content: center;
 }
 
-.support-options img {
-  width: 120px;
-  border-radius: 10px;
-  cursor: pointer;
+.support-options {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  align-items: center;
 }
+
+/* each button wrapper */
+.support-btn {
+  width: 140px;
+  height: 64px;
+  background: #FFD600; /* optional: common background */
+  border-radius: 12px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  text-decoration: none;
+}
+
+/* image inside button */
+.support-btn img {
+  max-width: 85%;
+  max-height: 85%;
+  object-fit: contain;
+  display: block;
+}
+
 
 
 </style>
