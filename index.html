@@ -56,62 +56,78 @@ img.emoji {
 }
 
 	
-  /* Buy Me a Coffee button fixed bottom-right */
-.bmc-official-float {
+  /* Popup overlay */
+.support-popup {
   position: fixed;
-  right: 20px;
-  bottom: 20px;
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  padding: 10px 18px;
-  background-color: #5F7FFF; /* আপনার script-এর color */
-  color: #ffffff;
-  font-family: "Cookie", cursive, system-ui, -apple-system, BlinkMacSystemFont;
-  font-size: 18px;
-  border-radius: 999px;
-  text-decoration: none;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
-  z-index: 9999;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.bmc-official-float:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.35);
-}
-
-.bmc-icon {
-  width: 34px;
-  height: 34px;
-  background-color: #FFDD00; /* coffee color */
-  color: #000;
-  border-radius: 50%;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 18px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 10000;
+}
+
+.support-popup.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Popup box */
+.support-popup-box {
+  background: #ffffff;
+  padding: 22px 24px 26px;
+  border-radius: 14px;
+  width: 100%;
+  max-width: 320px;
+  text-align: center;
+  position: relative;
+  transform: scale(0.9);
+  transition: transform 0.3s ease;
+}
+
+.support-popup.active .support-popup-box {
+  transform: scale(1);
+}
+
+.support-popup-box h3 {
+  margin: 0 0 16px;
+  font-size: 20px;
+  color: #333;
+}
+
+/* Close button */
+.popup-close {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
   line-height: 1;
 }
 
-	.bmc-official-float {
-  opacity: 1;
-  pointer-events: auto;
-  transition: opacity 0.35s ease, transform 0.35s ease;
+/* Support options */
+.support-options {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
 }
 
-.bmc-official-float.bmc-hide {
-  opacity: 0;
-  pointer-events: none;
-  transform: translateY(10px);
+.support-options img {
+  width: 120px;
+  max-width: 100%;
+  border-radius: 10px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-
-.bmc-text {
-  white-space: nowrap;
+.support-options img:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
 }
-
-
 
 </style>
 
@@ -1165,14 +1181,28 @@ document.addEventListener("DOMContentLoaded", () => {
 
 <!--Contact End-->
 
-<a
-  href="https://www.buymeacoffee.com/mazbah229"
-  target="_blank"
-  class="bmc-official-float"
-  aria-label="Buy me a coffee">
+<button class="bmc-official-float" id="supportBtn">
   <span class="bmc-icon">☕</span>
-  <span class="bmc-text">Buy me a coffee</span>
-</a>
+  <span class="bmc-text">Support me</span>
+</button>
+
+<div class="support-popup" id="supportPopup">
+  <div class="support-popup-box">
+    <button class="popup-close" id="popupClose">×</button>
+
+    <h3>Support Me ❤️</h3>
+
+    <div class="support-options">
+      <a href="https://www.supportkori.com/mazbah229" target="_blank">
+        <img src="/assets/img/spkr.png" alt="SupportKori">
+      </a>
+
+      <a href="https://www.buymeacoffee.com/mazbah229" target="_blank">
+        <img src="/assets/img/bmc.png" alt="Buy Me a Coffee">
+      </a>
+    </div>
+  </div>
+</div>
 
 
 <script>
@@ -1202,6 +1232,32 @@ document.addEventListener("DOMContentLoaded", () => {
     );
 
     observer.observe(copyrightSection);
+  });
+</script>
+
+	<script>
+  const supportBtn = document.getElementById("supportBtn");
+  const popup = document.getElementById("supportPopup");
+  const popupClose = document.getElementById("popupClose");
+
+  supportBtn.addEventListener("click", () => {
+    popup.classList.add("active");
+  });
+
+  popupClose.addEventListener("click", () => {
+    popup.classList.remove("active");
+  });
+
+  popup.addEventListener("click", (e) => {
+    if (e.target === popup) {
+      popup.classList.remove("active");
+    }
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      popup.classList.remove("active");
+    }
   });
 </script>
 
