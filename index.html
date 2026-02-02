@@ -57,10 +57,12 @@ img.emoji {
 
 	
   /* Popup overlay */
+/* Floating button */
 .bmc-official-float {
   position: fixed !important;
   right: 20px !important;
   bottom: 20px !important;
+  z-index: 2147483647 !important;
 
   display: inline-flex;
   align-items: center;
@@ -68,36 +70,76 @@ img.emoji {
   padding: 10px 18px;
 
   background-color: #5F7FFF;
-  color: #ffffff;
-  font-family: "Cookie", cursive, system-ui, -apple-system, BlinkMacSystemFont;
-  font-size: 18px;
-
-  border-radius: 999px;
+  color: #fff;
   border: none;
+  border-radius: 999px;
   cursor: pointer;
 
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
-  z-index: 2147483647 !important; /* ultra safe */
+  font-family: "Cookie", cursive, system-ui;
+  font-size: 18px;
+
+  box-shadow: 0 10px 25px rgba(0,0,0,.25);
 }
 
-/* hover */
-.bmc-official-float:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.35);
-}
-
-/* icon */
-.bmc-icon {
-  width: 34px;
-  height: 34px;
-  background-color: #FFDD00;
-  color: #000;
-  border-radius: 50%;
+/* popup overlay */
+.support-popup {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.55);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 18px;
+
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .3s ease;
+  z-index: 2147483646;
 }
+
+.support-popup.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* popup box */
+.support-popup-box {
+  background: #fff;
+  padding: 22px;
+  border-radius: 14px;
+  max-width: 320px;
+  width: 100%;
+  text-align: center;
+  position: relative;
+  transform: scale(.9);
+  transition: transform .3s ease;
+}
+
+.support-popup.active .support-popup-box {
+  transform: scale(1);
+}
+
+.popup-close {
+  position: absolute;
+  top: 6px;
+  right: 10px;
+  font-size: 22px;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.support-options {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+}
+
+.support-options img {
+  width: 120px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
 
 </style>
 
@@ -1155,25 +1197,53 @@ document.addEventListener("DOMContentLoaded", () => {
   <span class="bmc-icon">☕</span>
   <span class="bmc-text">Support me</span>
 </button>
-
-
-<div class="support-popup" id="supportPopup">
+<div id="supportPopup" class="support-popup">
   <div class="support-popup-box">
     <button class="popup-close" id="popupClose">×</button>
 
     <h3>Support Me ❤️</h3>
 
-    <div class="support-options">
-      <a href="https://www.supportkori.com/mazbah229" target="_blank">
-        <img src="/assets/img/spkr.png" alt="SupportKori">
-      </a>
+   
 
+      <a href="https://www.supportkori.com/mazbah229" target="_blank">
+        <img src="/assets/img/spkr.png" alt="Supportkori">
+      </a>
+	   <div class="support-options">
       <a href="https://www.buymeacoffee.com/mazbah229" target="_blank">
         <img src="/assets/img/bmc.png" alt="Buy Me a Coffee">
       </a>
     </div>
   </div>
 </div>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const btn = document.getElementById("supportBtn");
+    const popup = document.getElementById("supportPopup");
+    const close = document.getElementById("popupClose");
+
+    if (!btn || !popup) return;
+
+    document.body.appendChild(btn);
+    document.body.appendChild(popup);
+
+    btn.addEventListener("click", () => {
+      popup.classList.add("active");
+    });
+
+    close.addEventListener("click", () => {
+      popup.classList.remove("active");
+    });
+
+    popup.addEventListener("click", e => {
+      if (e.target === popup) popup.classList.remove("active");
+    });
+
+    document.addEventListener("keydown", e => {
+      if (e.key === "Escape") popup.classList.remove("active");
+    });
+  });
+</script>
+
 
 
 <script>
