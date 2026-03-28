@@ -8,9 +8,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <!-- Favicon Icon -->
-  <link rel="icon" href="https://mazbah229.github.io/assets/img/favicon.png">
+ 
+	<link rel="icon" href="https://mazbah229.github.io/assets/img/favicon_dark.png" media="(prefers-color-scheme: light)">
+<link rel="icon" href="https://mazbah229.github.io/assets/img/favicon.png" media="(prefers-color-scheme: dark)">
+
   <!-- Site Title -->
-  <title>Mohammad Mazbah Uddin - © 2021-2025</title>
+  <title>Mohammad Mazbah Uddin - © 2021-2026</title>
 <meta name="robots" content="max-image-preview:large">
 
 <meta name="google-site-verification" content="SJkIwG-YpiI5yONwgj3Rpm2PrixMboggLQcc3PclSAU" />
@@ -43,6 +46,10 @@ web designer salary, ai web designer, what is a web designer responsible for, gr
   <link rel="stylesheet" href="assets/css/plugins/animate.css">
   <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&family=Lexend+Deca:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Comic+Relief:wght@400;700&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="assets/css/style.css">
    <script src="https://cdn.jsdelivr.net/npm/twemoji@13.1.0/dist/twemoji.min.js"></script>
 <style>
@@ -51,6 +58,154 @@ img.emoji {
     width: 1.2em;
     vertical-align: -0.15em;
 }
+.bmc-official-float {
+  opacity: 1;
+  pointer-events: auto;
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.bmc-official-float.bmc-hide {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(10px);
+}
+
+	.bmc-official-float {
+  font-family: 'Cookie', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  -webkit-text-size-adjust: 100%;
+}
+
+	.bmc-icon img {
+  width: 18px;
+  height: 18px;
+  display: block;
+}
+
+  /* Popup overlay */
+/* Floating button */
+.bmc-official-float {
+  position: fixed !important;
+  right: 20px !important;
+  bottom: 20px !important;
+  z-index: 2147483647 !important;
+
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 18px;
+
+  background-color: #5F7FFF;
+  color: #fff;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+
+  font-family: "Cookie", cursive, system-ui;
+  font-size: 18px;
+
+  box-shadow: 0 10px 25px rgba(0,0,0,.25);
+}
+
+/* popup overlay */
+.support-popup {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .3s ease;
+  z-index: 2147483646;
+}
+
+.support-popup.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* popup box */
+.support-popup-box {
+  background: #fff;
+  padding: 22px;
+  border-radius: 14px;
+  max-width: 320px;
+  width: 100%;
+  text-align: center;
+  position: relative;
+  transform: scale(.9);
+  transition: transform .3s ease;
+}
+
+.support-popup.active .support-popup-box {
+  transform: scale(1);
+}
+
+.popup-close {
+  position: absolute;
+  top: 6px;
+  right: 10px;
+  font-size: 22px;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.support-options {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  align-items: center;
+}
+
+.support-options a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.support-options img {
+  height: 36px;        /* 👈 magic line */
+  width: auto;
+  max-width: 120px;
+  border-radius: 10px;
+  object-fit: contain;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.support-options img:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+/* each support button */
+.support-btn {
+  background: #FFD600;
+  border-radius: 10px;
+  padding: 8px 12px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  text-decoration: none;
+}
+
+	.bmc-text {  font-family: "Comic Relief", system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 18px;
+  line-height: 1;
+  white-space: nowrap;
+  font-weight: 700;
+
+  /* 👇 মোবাইল font glitch fix */
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+
+
 </style>
 
 
@@ -128,7 +283,7 @@ img.emoji {
           </ul>
           <div class="cs_height_75 cs_height_lg_50"></div>
           <div class="cs_social_btns d-flex cs_gap_30">
-            <a class="cs_accent_color_2" href="https://www.facebook.com/mazbah229.bd/" target="_blank">
+            <a class="cs_accent_color_2" href="https://facebook.com/mazbah.bd.229" target="_blank">
               <svg width="13" height="22" viewBox="0 0 13 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
                   d="M12 1H9C7.67392 1 6.40215 1.52678 5.46447 2.46447C4.52678 3.40215 4 4.67392 4 6V9H1V13H4V21H8V13H11L12 9H8V6C8 5.73478 8.10536 5.48043 8.29289 5.29289C8.48043 5.10536 8.73478 5 9 5H12V1Z"
@@ -175,7 +330,7 @@ img.emoji {
           </div>
           <div class="cs_funfact cs_style_1 text-end">
             <h2 class="cs_funfact_number cs_font_24 cs_white_color cs_semi_bold m-0">
-              <span class="odometer" data-count-to="5"></span>+
+              <span class="odometer" data-count-to="6"></span>+
             </h2>
             <div class="cs_white_color cs_opacity_06">Years Experience</div>
           </div>
@@ -714,7 +869,7 @@ Best wishes. ❤️</p>
                 </div>
                 <p class="cs_testimonial_text">Trusted and very good web designer! Friendly and works very diligently! Makes suggestions and explains the good and bad! I am satisfied working with him! You can also work with him.</p>
                 <div class="cs_tastimonial_avater d-flex align-items-center">
-                  <img src="https://platform-lookaside.fbsbx.com/platform/profilepic/?eai=Aa2rq4i_y6e0U_FUJkdoD-BWBabs1duobJORGyWUaB3iOt15yXGqTr5OsOCEPN3tunC_RTjfP7bV&psid=29083983764579086&height=120&width=120&ext=1765038191&hash=AT9HQyLV2loGKLwqqvwkv4Is" alt="avatar_img">
+                  <img src="https://scontent.fdac27-2.fna.fbcdn.net/v/t39.30808-1/558192480_659328130562608_1737511843518702303_n.jpg?stp=cp0_dst-jpg_s40x40_tt6&_nc_cat=103&ccb=1-7&_nc_sid=1d2534&_nc_eui2=AeGdnz3dLpe_yxGRhVwc5zILNd6rGavTyrE13qsZq9PKscv6aKhNdeK2Kzrjc8_w4lFd_hLrKM1D5nQRBFL1ReIX&_nc_ohc=wcAesUDYu5wQ7kNvwFRme-2&_nc_oc=AdlcyJ3MoSiIo5LizQ5O00M6dKG2R7BXmrablje7qWtmC4-_weygBvDVVsTiXY0CU_s&_nc_zt=24&_nc_ht=scontent.fdac27-2.fna&_nc_gid=HHDG_o0KpkHWKGhDhZ0Vww&oh=00_AfpRgUshvxBbXbWmysBlhudo7yNaB4MQEhYD4q70Wh_ZzQ&oe=69769B67" alt="avatar_img">
                   <div class="cs_ml_20">
                     <h2 class="cs_testmonial_name cs_font_20 cs_semi_bold mb-0">Ananta Ep</h2>
                     <p class="cs_testmonial_designation cs_font_16 cs_normal mb-0">E-Commerce Owner</p>
@@ -737,7 +892,7 @@ Best wishes. ❤️</p>
                 </div>
                 <p class="cs_testimonial_text">Grateful work, I'm satisfied.</p>
                 <div class="cs_tastimonial_avater d-flex align-items-center">
-                  <img src="https://scontent.fcgp28-1.fna.fbcdn.net/v/t39.30808-1/545904551_122140189550869688_374160270055638783_n.jpg?stp=c524.144.1000.1000a_cp0_dst-jpg_s40x40_tt6&_nc_cat=107&ccb=1-7&_nc_sid=2d3e12&_nc_ohc=ogckjvqRPYcQ7kNvwF3EZVb&_nc_oc=AdnCGZxOgAsZlS9-xD-2mjsDMrouBhB2TUv7h0-aWrIaQ7hsjQI_V1tyK4XlxKie97U&_nc_zt=24&_nc_ht=scontent.fcgp28-1.fna&_nc_gid=7NzATNi-rTksjmVaFwcP_A&oh=00_Afh953uIYYiqog70CkZO0-IzCIl_Ohhmj2A5UbvKlbWFeg&oe=6931A3E7" alt="avatar_img">
+                  <img src="https://scontent.fdac27-1.fna.fbcdn.net/v/t39.30808-1/545904551_122140189550869688_374160270055638783_n.jpg?stp=c524.144.1000.1000a_cp0_dst-jpg_s40x40_tt6&_nc_cat=107&ccb=1-7&_nc_sid=2d3e12&_nc_eui2=AeERgMzaSwts0S-ztxmg-1qpFlCqf09tGHUWUKp_T20YdZOqxaYvdfo-tUZ-y2-7BL5y7UaLYRjiioLHagWvp9Uo&_nc_ohc=Ip_j7eev94EQ7kNvwEuv0uJ&_nc_oc=AdkI19jOpmaW-DtPgxCdpHh0w20QiI2XZ8ldrcdzySFVu6hC_8wy1WZt6dwUhk8xqTA&_nc_zt=24&_nc_ht=scontent.fdac27-1.fna&_nc_gid=HHDG_o0KpkHWKGhDhZ0Vww&oh=00_AfoN4fFhugjVw5Au2aUdYdWE19yIPuOUhwnBozhlHHAHqQ&oe=69766A27" alt="avatar_img">
                   <div class="cs_ml_20">
                     <h2 class="cs_testmonial_name cs_font_20 cs_semi_bold mb-0">Nuvelaa</h2>
                     <p class="cs_testmonial_designation cs_font_16 cs_normal mb-0">E-Commerce Brand</p>
@@ -1053,7 +1208,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-
   <!--Contact start-->
 
 
@@ -1104,7 +1258,124 @@ document.addEventListener("DOMContentLoaded", () => {
 
 <!--Contact End-->
 
+<button id="supportBtn" class="bmc-official-float">
+  <span class="bmc-icon">
+  <img src="/assets/coffee.svg" alt="">
+</span>
+  <span class="bmc-text">Support me</span>
+</button>
+<div id="supportPopup" class="support-popup">
+  <div class="support-popup-box">
+    <button class="popup-close" id="popupClose">×</button>
 
+    <h3>Support Me ❤️</h3>
+
+   
+  <div class="support-options">
+      <a href="https://www.supportkori.com/mazbah229" target="_blank">
+        <img src="/assets/img/spkr.png" alt="Supportkori">
+      </a>
+	  
+      <a href="https://www.buymeacoffee.com/mazbah229" target="_blank">
+        <img src="/assets/img/bmc.png" alt="Buy Me a Coffee">
+      </a>
+    </div>
+  </div>
+</div>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const btn = document.getElementById("supportBtn");
+    const popup = document.getElementById("supportPopup");
+    const close = document.getElementById("popupClose");
+
+    if (!btn || !popup) return;
+
+    document.body.appendChild(btn);
+    document.body.appendChild(popup);
+
+    btn.addEventListener("click", () => {
+      popup.classList.add("active");
+    });
+
+    close.addEventListener("click", () => {
+      popup.classList.remove("active");
+    });
+
+    popup.addEventListener("click", e => {
+      if (e.target === popup) popup.classList.remove("active");
+    });
+
+    document.addEventListener("keydown", e => {
+      if (e.key === "Escape") popup.classList.remove("active");
+    });
+  });
+</script>
+
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+  const btn = document.getElementById("supportBtn");
+  const popup = document.getElementById("supportPopup");
+  const close = document.getElementById("popupClose");
+  const footer = document.querySelector(".cs_copyright");
+
+  if (!btn || !footer) {
+    console.warn("supportBtn or .cs_copyright not found");
+    return;
+  }
+
+  /* ensure floating button is NOT inside footer */
+  document.body.appendChild(btn);
+  if (popup) document.body.appendChild(popup);
+
+  /* ===============================
+     Popup open / close
+  ================================ */
+  btn.addEventListener("click", () => {
+    if (popup) {
+      popup.classList.add("active");
+      btn.classList.add("bmc-hide"); // popup open হলে button hide
+    }
+  });
+
+  if (close && popup) {
+    close.addEventListener("click", () => {
+      popup.classList.remove("active");
+      btn.classList.remove("bmc-hide");
+    });
+
+    popup.addEventListener("click", (e) => {
+      if (e.target === popup) {
+        popup.classList.remove("active");
+        btn.classList.remove("bmc-hide");
+      }
+    });
+  }
+
+  /* ===============================
+     Footer hide (IntersectionObserver)
+  ================================ */
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          btn.classList.add("bmc-hide");
+        } else {
+          if (!popup || !popup.classList.contains("active")) {
+            btn.classList.remove("bmc-hide");
+          }
+        }
+      });
+    },
+    { threshold: 0.1 }
+  );
+
+  observer.observe(footer);
+
+});
+</script>
 
 </body>
 </html>

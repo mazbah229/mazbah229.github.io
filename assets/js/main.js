@@ -31,6 +31,8 @@
     return $(selector).length > 0;
   };
 
+  var preloaderFinished = false;
+
   $(window).on('load', function () {
     $(window).trigger('scroll');
     $(window).trigger('resize');
@@ -40,6 +42,8 @@
 
   $(function () {
     $(window).trigger('resize');
+    preloader();
+    window.setTimeout(preloader, 900);
     mainNav();
     stickyHeader();
     dynamicBackground();
@@ -61,6 +65,10 @@
     1. Preloader
   --------------------------------------------------------------*/
   function preloader() {
+    if (preloaderFinished || !$.exists('.cs_preloader')) {
+      return;
+    }
+    preloaderFinished = true;
     $('.cs_preloader_in').fadeOut();
     $('.cs_preloader').delay(150).fadeOut('slow');
   }
