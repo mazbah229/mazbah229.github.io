@@ -30,31 +30,24 @@
   $.exists = function (selector) {
     return $(selector).length > 0;
   };
-
-  var preloaderFinished = false;
+  var preloaderStartedAt = Date.now();
 
   $(window).on('load', function () {
     $(window).trigger('scroll');
-    $(window).trigger('resize');
     preloader();
-    isotopInit();
+    scheduleNonCriticalInit();
   });
 
   $(function () {
     $(window).trigger('resize');
-    preloader();
-    window.setTimeout(preloader, 900);
     mainNav();
     stickyHeader();
-    dynamicBackground();
-    isotopInit();
+    dynamicBackground('.cs_hero[data-src]');
     modalVideo();
     tabs();
     counterInit();
     progressBar();
-    if ($.exists('.wow')) {
-      new WOW().init();
-    }
+    window.setTimeout(preloader, 1000);
   });
 
   $(window).on('scroll', function () {
@@ -65,12 +58,36 @@
     1. Preloader
   --------------------------------------------------------------*/
   function preloader() {
-    if (preloaderFinished || !$.exists('.cs_preloader')) {
+    var $preloader = $('.cs_preloader');
+    if (!$preloader.length) {
       return;
     }
-    preloaderFinished = true;
-    $('.cs_preloader_in').fadeOut();
-    $('.cs_preloader').delay(150).fadeOut('slow');
+
+    var elapsed = Date.now() - preloaderStartedAt;
+    var remaining = Math.max(0, 1000 - elapsed);
+
+    window.setTimeout(function () {
+      $preloader.addClass('cs_preloader_hide');
+      window.setTimeout(function () {
+        $preloader.remove();
+      }, 220);
+    }, remaining);
+  }
+
+  function scheduleNonCriticalInit() {
+    var run = function () {
+      lazyBackgroundInit();
+      isotopInit();
+      initWow();
+      counterInit();
+      initCursor();
+    };
+
+    if ('requestIdleCallback' in window) {
+      window.requestIdleCallback(run, { timeout: 800 });
+    } else {
+      window.setTimeout(run, 120);
+    }
   }
 
   /*--------------------------------------------------------------
@@ -127,12 +144,46 @@
   /*--------------------------------------------------------------
     4. Dynamic Background
   --------------------------------------------------------------*/
-  function dynamicBackground() {
-    $('[data-src]').each(function () {
+  function dynamicBackground(selector) {
+    $(selector || '[data-src]').each(function () {
+      if ($(this).attr('data-bgLoaded')) {
+        return;
+      }
+
       var src = $(this).attr('data-src');
       $(this).css({
         'background-image': 'url(' + src + ')',
       });
+      $(this).attr('data-bgLoaded', 'true');
+    });
+  }
+
+  function lazyBackgroundInit() {
+    var selector = '[data-src]:not(.cs_hero)';
+
+    if (!('IntersectionObserver' in window)) {
+      dynamicBackground(selector);
+      return;
+    }
+
+    var bgObserver = new IntersectionObserver(
+      function (entries, observer) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) {
+            return;
+          }
+
+          dynamicBackground(entry.target);
+          observer.unobserve(entry.target);
+        });
+      },
+      {
+        rootMargin: '200px 0px',
+      },
+    );
+
+    $(selector).each(function () {
+      bgObserver.observe(this);
     });
   }
 
@@ -230,10 +281,24 @@
     });
   }
 
+  function initWow() {
+    if ($.exists('.wow') && typeof WOW !== 'undefined') {
+      new WOW().init();
+    }
+  }
+
   /*--------------------------------------------------------------
     10. Cursor Animation
   --------------------------------------------------------------*/
-  $(function () {
+  function initCursor() {
+    if (
+      !window.matchMedia('(pointer:fine)').matches ||
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches ||
+      typeof gsap === 'undefined'
+    ) {
+      return;
+    }
+
     $('body').append('<span class="cs_cursor_lg d"></span>');
     $('body').append('<span class="cs_cursor_sm"></span>');
     $('a, button').on('mouseenter', function () {
@@ -244,7 +309,11 @@
       $('.cs_cursor_lg').removeClass('opacity-0');
       $('.cs_cursor_sm').removeClass('opacity-0');
     });
-  });
+    document.addEventListener('mousemove', cursorMovingAnimation, {
+      passive: true,
+    });
+  }
+
   function cursorMovingAnimation(event) {
     try {
       const timing = gsap.timeline({
@@ -269,5 +338,4 @@
       console.log(err);
     }
   }
-  document.addEventListener('mousemove', cursorMovingAnimation);
 })(jQuery); // End of use strict
