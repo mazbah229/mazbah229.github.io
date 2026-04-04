@@ -128,7 +128,7 @@ img.emoji {
   background: #fff;
   padding: 22px;
   border-radius: 14px;
-  max-width: 420px;
+  max-width: 300px;
   width: 100%;
   text-align: center;
   position: relative;
@@ -152,30 +152,24 @@ img.emoji {
 }
 
 .support-options {
-  display: flex;
-  gap: 14px;
-  justify-content: center;
-  align-items: center;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px; /* 👈 কমিয়ে দিলাম */
 }
 
 .support-options a {
-  display: inline-flex;
+  display: flex;
   align-items: center;
   justify-content: center;
+  width: 100%; /* 👈 এটা important */
 }
 
 .support-options img {
-  height: 36px;        /* 👈 magic line */
-  width: auto;
-  max-width: 120px;
+  height: 36px;
+  width: 100%;           /* 👈 full width */
+  max-width: 140px;      /* 👈 optional (limit control) */
   border-radius: 10px;
   object-fit: contain;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.support-options img:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
 }
 
 /* each support button */
@@ -1261,16 +1255,20 @@ document.addEventListener("DOMContentLoaded", function() {
 
    
   <div class="support-options">
-      <a href="https://www.supportkori.com/mazbah229" target="_blank">
+      <a href="https://www.supportkori.com/mazbah229" onclick="window.open(this.href, 'popup', 'width=500,height=600'); return false;">
         <img src="/assets/img/spkr.png" alt="Supportkori">
       </a>
 	  
-      <a href="https://www.buymeacoffee.com/mazbah229" target="_blank">
+      <a href="https://www.buymeacoffee.com/mazbah229" onclick="window.open(this.href, 'popup', 'width=500,height=600'); return false;">
         <img src="/assets/img/bmc.png" alt="Buy Me a Coffee">
       </a>
-<a href="https://pixonexit.com/bank-details/" target="_blank">
+<a href="https://pixonexit.com/bank-details/" onclick="window.open(this.href, 'popup', 'width=500,height=600'); return false;">
         <img src="/assets/img/bank.png" alt="Donate Via Bank">
       </a>
+      <a href="https://pixonexit.com/bank-details/#MFS" onclick="window.open(this.href, 'popup', 'width=500,height=600'); return false;">
+        <img src="/assets/img/dbd.png" alt="Donate From BD">
+      </a>
+     
      
     </div>
   </div>
@@ -1368,6 +1366,69 @@ document.addEventListener("DOMContentLoaded", function () {
   observer.observe(footer);
 
 });
+</script>
+
+<script>
+const modal = document.getElementById("popupModal");
+const frame = document.getElementById("popupFrame");
+const title = document.querySelector(".popup-title");
+
+// open popup
+document.querySelectorAll(".popup-link").forEach(link => {
+  link.addEventListener("click", function(e) {
+    e.preventDefault();
+
+    const url = this.href;
+
+    // Known login providers → open new tab
+    if (
+      url.includes("accounts.google.com") ||
+      url.includes("facebook.com/login") ||
+      url.includes("oauth") ||
+      url.includes("signin")
+    ) {
+      window.open(url, "_blank");
+      return;
+    }
+
+    frame.src = url;
+    title.innerText = new URL(url).hostname;
+    modal.classList.add("active");
+  });
+});
+
+// close
+document.querySelector(".close-btn").onclick = () => {
+  modal.classList.remove("active");
+  frame.src = "";
+};
+
+// click outside close
+modal.onclick = (e) => {
+  if (e.target === modal) {
+    modal.classList.remove("active");
+    frame.src = "";
+  }
+};
+
+// detect iframe redirect to login (auto new tab)
+frame.onload = function() {
+  try {
+    const currentURL = frame.contentWindow.location.href;
+
+    if (
+      currentURL.includes("accounts.google.com") ||
+      currentURL.includes("facebook.com") ||
+      currentURL.includes("login")
+    ) {
+      window.open(currentURL, "_blank");
+      modal.classList.remove("active");
+      frame.src = "";
+    }
+  } catch (err) {
+    // Cross-origin block → ignore safely
+  }
+};
 </script>
 
 </body>
