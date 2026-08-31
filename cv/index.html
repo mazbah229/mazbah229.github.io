@@ -7,40 +7,90 @@
 <!-- Auto Redirect -->
 <meta http-equiv="refresh" content="1; URL=https://mazbah229.github.io/cv/%5BCV%5D%20Mohammad%20Mazbah%20Uddin.pdf">
 
-<title>Downloading CV...</title>
-<link rel="shortcut icon" href="https://mazbah229.github.io/assets/img/favicon.png">
+<title>Downloading CV... | Mohammad Mazbah Uddin</title>
+<link rel="shortcut icon" href="https://pub-bf2ad4941b75432b935d391277af0e90.r2.dev/wp-content/uploads/2026/05/Mazbah_fav-small.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
-    /* RESET */
-    * {
+    :root{
+        --navy-deep: #060814;
+        --navy: #0a0e27;
+        --navy-light: #10152f;
+        --teal: #2dd4bf;
+        --teal-dark: #14b8a6;
+        --glass-bg: rgba(255,255,255,0.05);
+        --glass-border: rgba(255,255,255,0.12);
+        --text-muted: #aab0c6;
+    }
+
+    *, *::before, *::after {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
         font-family: "Inter", sans-serif;
     }
 
-    /* PAGE */
+    html { -webkit-text-size-adjust: 100%; }
+
     body {
-        height: 100vh;
+        min-height: 100dvh;
         width: 100%;
-        background: radial-gradient(circle at top, #202040, #0d0d16);
+        background:
+            radial-gradient(circle at 20% 15%, rgba(45,212,191,0.10), transparent 40%),
+            radial-gradient(circle at 80% 85%, rgba(45,212,191,0.08), transparent 45%),
+            radial-gradient(circle at top, #131a3d, var(--navy-deep) 70%);
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
         color: #fff;
+        padding: clamp(16px, 5vw, 32px);
+        position: relative;
+        overflow-x: hidden;
+    }
+
+    /* subtle floating glow, clipped so it never causes horizontal scroll */
+    body::before, body::after {
+        content: "";
+        position: fixed;
+        width: min(420px, 60vw);
+        height: min(420px, 60vw);
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(45,212,191,0.18), transparent 70%);
+        filter: blur(10px);
+        z-index: 0;
+        pointer-events: none;
+    }
+    body::before { top: -120px; left: -120px; }
+    body::after { bottom: -140px; right: -140px; }
+
+    /* Logo */
+    .brand-logo {
+        position: relative;
+        z-index: 2;
+        width: clamp(120px, 30vw, 180px);
+        height: auto;
+        display: block;
+        margin: 0 auto clamp(20px, 4vw, 32px);
     }
 
     /* GLASS CARD */
     .glass-box {
-        width: 350px;
-        padding: 40px 30px;
-        border-radius: 18px;
-        backdrop-filter: blur(14px);
-        background: rgba(255,255,255,0.06);
-        border: 1px solid rgba(255,255,255,0.1);
+        position: relative;
+        z-index: 2;
+        width: 380px;
+        max-width: 100%;
+        padding: clamp(30px, 6vw, 46px) clamp(20px, 5vw, 34px);
+        border-radius: 22px;
+        backdrop-filter: blur(18px);
+        -webkit-backdrop-filter: blur(18px);
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
         text-align: center;
-        box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+        box-shadow: 0 12px 45px rgba(0,0,0,0.35);
         animation: fadeIn .7s ease-out;
     }
 
@@ -50,14 +100,27 @@
     }
 
     /* Loader Spinner */
+    .spinner-wrap{
+        width: clamp(58px, 14vw, 74px);
+        height: clamp(58px, 14vw, 74px);
+        margin: 0 auto clamp(18px, 4vw, 26px);
+        position: relative;
+    }
     .spinner {
-        width: 65px;
-        height: 65px;
-        border: 6px solid rgba(255,255,255,0.15);
-        border-top: 6px solid #4a8bff;
+        width: 100%;
+        height: 100%;
+        border: 6px solid rgba(255,255,255,0.10);
+        border-top: 6px solid var(--teal);
         border-radius: 50%;
         animation: spin 1s linear infinite;
-        margin: 0 auto 20px auto;
+    }
+    .spinner-icon{
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: clamp(18px, 4vw, 22px);
     }
 
     @keyframes spin {
@@ -65,43 +128,82 @@
     }
 
     /* Text */
-    .loading-text {
-        font-size: 17px;
-        margin-bottom: 25px;
-        color: #D6D6D6;
-    }
-    .loading-text b { color: #fff; }
-
-    /* Button */
-    .back-btn {
-        display: inline-block;
-        padding: 10px 18px;
-        background: linear-gradient(135deg, #4B91F7, #367AF6);
-        border-radius: 8px;
+    .loading-title{
+        font-family: "Baloo 2", sans-serif;
+        font-weight: 700;
+        font-size: clamp(19px, 4.5vw, 22px);
+        margin-bottom: 10px;
         color: #fff;
-        font-size: 15px;
-        font-weight: 600;
+    }
+    .loading-text {
+        font-size: clamp(14px, 3.5vw, 15.5px);
+        line-height: 1.6;
+        margin-bottom: clamp(22px, 5vw, 28px);
+        color: var(--text-muted);
+    }
+    .loading-text b { color: var(--teal); }
+
+    /* Progress bar, glass style */
+    .progress-track{
+        width: 100%;
+        height: 6px;
+        border-radius: 999px;
+        background: rgba(255,255,255,0.08);
+        overflow: hidden;
+        margin-bottom: clamp(22px, 5vw, 28px);
+        border: 1px solid rgba(255,255,255,0.08);
+    }
+    .progress-fill{
+        height: 100%;
+        width: 40%;
+        border-radius: 999px;
+        background: linear-gradient(135deg, var(--teal), var(--teal-dark));
+        animation: loadBar 1.4s ease-in-out infinite;
+    }
+    @keyframes loadBar{
+        0%   { transform: translateX(-100%); width: 40%; }
+        50%  { transform: translateX(60%);   width: 55%; }
+        100% { transform: translateX(150%);  width: 40%; }
+    }
+
+    /* Button — pill, teal, matches "Hire Me!" style */
+    .back-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        width: 100%;
+        max-width: 260px;
+        padding: 12px 26px;
+        background: linear-gradient(135deg, var(--teal), var(--teal-dark));
+        border-radius: 999px;
+        color: #06231f;
+        font-size: clamp(14px, 3.5vw, 15px);
+        font-weight: 700;
         border: none;
         cursor: pointer;
-        box-shadow: 0 4px 15px rgba(54, 122, 246, 0.35);
-        transition: .2s;
+        box-shadow: 0 6px 20px rgba(45,212,191,0.30);
+        transition: transform .2s ease, box-shadow .2s ease;
     }
 
-    .back-btn:hover {
+    .back-btn:hover, .back-btn:focus-visible {
         transform: translateY(-2px);
-        box-shadow: 0 6px 20px rgba(54, 122, 246, 0.45);
+        box-shadow: 0 10px 26px rgba(45,212,191,0.42);
     }
 
     /* Footer */
     .footer {
-        margin-top: 35px;
-        font-size: 14px;
-        color: #aaa;
+        position: relative;
+        z-index: 2;
+        margin-top: clamp(26px, 5vw, 38px);
+        font-size: clamp(12px, 3vw, 13.5px);
+        color: var(--text-muted);
         text-align: center;
+        padding: 0 8px;
     }
 
     .footer a {
-        color: #d5d5ff;
+        color: var(--teal);
         font-weight: 600;
         text-decoration: none;
     }
@@ -109,26 +211,54 @@
     .footer a:hover {
         text-decoration: underline;
     }
+
+    /* Respect reduced-motion preference */
+    @media (prefers-reduced-motion: reduce) {
+        .glass-box, .spinner, .progress-fill { animation: none; }
+    }
+
+    /* Small phones */
+    @media (max-width: 360px) {
+        .glass-box { border-radius: 18px; }
+    }
 </style>
 </head>
 
 <body>
 
+    <img
+        class="brand-logo"
+        src="https://pub-bf2ad4941b75432b935d391277af0e90.r2.dev/wp-content/uploads/2026/05/logo_f_wh.png"
+        alt="Mohammad Mazbah Uddin logo"
+        width="200"
+        height="60"
+        loading="eager"
+        fetchpriority="high">
+
     <div class="glass-box">
-        <div class="spinner"></div>
+        <div class="spinner-wrap">
+            <div class="spinner"></div>
+            <div class="spinner-icon">📄</div>
+        </div>
+
+        <div class="loading-title">Preparing your download</div>
 
         <p class="loading-text">
-            Please wait… <br> Downloading the <b>CV</b>.
+            Please wait… downloading the <b>CV</b> of<br>Mohammad Mazbah Uddin.
         </p>
 
-        <a href="https://mazbah229.github.io/">
-            <button class="back-btn">⬅ Back</button>
+        <div class="progress-track">
+            <div class="progress-fill"></div>
+        </div>
+
+        <a href="https://mazbah229.pro.bd/" style="text-decoration:none; display:inline-block; width:100%;">
+            <button class="back-btn">⬅ Back to Portfolio</button>
         </a>
     </div>
 
     <div class="footer">
-        © 2020-<span id="year"></span> 
-        <a href="/" target="_blank">MOHAMMAD MAZBAH UDDIN</a>. 
+        © 2020-<span id="year"></span>
+        <a href="/" target="_blank">MOHAMMAD MAZBAH UDDIN</a>.
         All Rights Reserved.
     </div>
 
